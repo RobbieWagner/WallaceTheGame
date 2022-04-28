@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Character : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Character : MonoBehaviour
 
     public int score = 0;
 
-    Rigidbody2D body;
+    public Rigidbody2D body;
 
     BoxCollider2D bc2d; // Handles boxCasting, which tells if the player interacts with things
     public LayerMask interactable;
@@ -26,16 +27,15 @@ public class Character : MonoBehaviour
     public float runSpeed = 5.0f;
     public Animator animator;
 
-    public Animator ghostAnimator;
-    private bool ghostSeen;
-    public Transform ghost;
-    public GameObject ghostParticles;
+    // public Animator ghostAnimator;
+    // private bool ghostSeen;
+    // public Transform ghost;
+    // public GameObject ghostParticles;
     
     public GameObject scoreGO;
-    public Text scoreText;
+    public TMP_Text scoreText;
 
-    public Text dialogueText;
-    public string openingDialoguePath;
+    public TMP_Text dialogueText;
     public string allergyDialoguePath;
 
     string dialoguePath;
@@ -59,12 +59,10 @@ public class Character : MonoBehaviour
         characterOriginX = transform.position.x;
         characterOriginY = transform.position.y;
 
-        ghostSeen = false;
+        //ghostSeen = false;
         hasDied = false;
 
         scoreText.fontSize = 20;
-
-        StartCoroutine(ReadDialogue(new StreamReader(openingDialoguePath)));
     }
 
     void Update()
@@ -77,21 +75,21 @@ public class Character : MonoBehaviour
             animator.SetFloat("Speed X", horizontal);
             animator.SetFloat("Speed Y", vertical);
 
-            if(gameObject.transform.position.y > 35.5f && gameObject.transform.position.x > 32f)
-            {
-                ghostAnimator.SetBool("FloatingAway", true);
-                ghostSeen = true;
-                ghostParticles.SetActive(true);
-            }
+            // if(gameObject.transform.position.y > 35.5f && gameObject.transform.position.x > 32f)
+            // {
+            //     ghostAnimator.SetBool("FloatingAway", true);
+            //     ghostSeen = true;
+            //     ghostParticles.SetActive(true);
+            // }
 
-            if(ghostSeen && ghost.position.y > -50)
-            {
-                ghost.Translate(-.0275f, 0, 0);
-            }
-            else if(ghostSeen)
-            {
-                Destroy(ghost.gameObject);
-            }
+            // if(ghostSeen && ghost.position.y > -50)
+            // {
+            //     ghost.Translate(-.0275f, 0, 0);
+            // }
+            // else if(ghostSeen)
+            // {
+            //     Destroy(ghost.gameObject);
+            // }
         }
 
         if(Input.GetKeyDown("space"))
@@ -188,7 +186,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    IEnumerator ReadDialogue(StreamReader dialogueReader)
+    public IEnumerator ReadDialogue(StreamReader dialogueReader)
     {
         //Stop the player from moving
         body.velocity = new Vector2(0, 0);
