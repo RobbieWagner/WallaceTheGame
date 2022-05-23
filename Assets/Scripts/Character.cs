@@ -119,12 +119,6 @@ public class Character : MonoBehaviour
 
                 DialogueHolder dialogueInfo = hit.transform.gameObject.GetComponent<DialogueHolder>();
 
-                GrandpasGift grandpasGift = hit.transform.gameObject.GetComponent<GrandpasGift>();
-                if(grandpasGift != null && !(dialogueInfo.interactedOnce))
-                {
-                    StartCoroutine(grandpasGift.GiftPlayer(this.gameObject.GetComponent<Character>()));
-                }
-
                 Percy_Movement percyMovement = hit.transform.gameObject.GetComponent<Percy_Movement>();
                 if(percyMovement != null)
                 {
@@ -169,7 +163,6 @@ public class Character : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D colliderEvent)
     {
-        
         if(colliderEvent.gameObject.CompareTag("Enemy"))
         {
             // Respawn the player, they keep their points
@@ -182,6 +175,16 @@ public class Character : MonoBehaviour
             {
                 hasDied = true;
                 StartCoroutine(ReadDialogue(new StreamReader(allergyDialoguePath)));
+            }
+        }
+
+        if(colliderEvent.gameObject.CompareTag("Gate"))
+        {
+            Gate gate = colliderEvent.gameObject.GetComponent<Gate>();
+
+            if(!gate.opened)
+            {
+                gate.OpenGate();
             }
         }
     }
@@ -202,11 +205,11 @@ public class Character : MonoBehaviour
         while((line = dialogueReader.ReadLine()) != " ")
         {
             dialogueText.text = line;
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.75f);
             while((line = dialogueReader.ReadLine()) != "")
             {
                 dialogueText.text = line;
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(.75f);
             }
         }
 

@@ -9,10 +9,13 @@ public class RunTutorial : MonoBehaviour
     public Character character;
     public string openingDialoguePath;
     public string tutorialPart2Path;
+    public string tutorialPart3Path;
 
     public GameObject wasdControls;
 
     bool hasMoved = false;
+
+    public Gate tutorialGate;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +29,7 @@ public class RunTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(character.canMove &&(Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))) hasMoved = true;
+        if(character.canMove &&(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))) hasMoved = true;
     }
 
     IEnumerator Tutorial()
@@ -39,6 +42,10 @@ public class RunTutorial : MonoBehaviour
         wasdControls.SetActive(false);
 
         yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart2Path)));
+
+        while(!tutorialGate.opened) yield return new WaitForSeconds(.3f);
+
+        yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart3Path)));
 
         StopCoroutine(Tutorial());
     }
