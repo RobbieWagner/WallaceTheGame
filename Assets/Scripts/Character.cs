@@ -213,7 +213,7 @@ public class Character : MonoBehaviour
         {
 
             dialogueText.text = line;
-            yield return new WaitForSeconds(.6f);
+            yield return new WaitForSeconds(.3f);
             while((line = dialogueReader.ReadLine()) != "")
             {
                 dialogueText.text = line;
