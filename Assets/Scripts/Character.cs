@@ -49,6 +49,8 @@ public class Character : MonoBehaviour
 
     public float boxCastSize;
 
+    public bool goToNextLine;
+
     void Start()
     {
         // Get the rigid body component for the player character.
@@ -63,6 +65,8 @@ public class Character : MonoBehaviour
         hasDied = false;
 
         scoreText.fontSize = 20;
+
+        bool goToNextLine = false;
     }
 
     void Update()
@@ -94,7 +98,10 @@ public class Character : MonoBehaviour
 
         if(Input.GetKeyDown("space"))
         {
-            RaycastHit2D hit = Physics2D.BoxCast(bc2d.bounds.center, bc2d.bounds.size, 0f, Vector2.down, boxCastDistance, interactable);
+
+            if(!goToNextLine) goToNextLine = true;
+
+            /* RaycastHit2D hit = Physics2D.BoxCast(bc2d.bounds.center, bc2d.bounds.size, 0f, Vector2.down, boxCastDistance, interactable);
 
             if (!hit)
             {
@@ -141,7 +148,7 @@ public class Character : MonoBehaviour
                 float lowPitch = dialogueInfo.lowPitch;
                 float highPitch = dialogueInfo.highPitch;
                 StartCoroutine(ReadDialogue(new StreamReader(dialoguePath), dialogueSound, color, lowPitch, highPitch, dialogueInfo.interactedOnce, dialogueInfo));
-            }
+            } */
         }
     }
 
@@ -204,13 +211,17 @@ public class Character : MonoBehaviour
 
         while((line = dialogueReader.ReadLine()) != " ")
         {
+
             dialogueText.text = line;
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(.6f);
             while((line = dialogueReader.ReadLine()) != "")
             {
                 dialogueText.text = line;
-                yield return new WaitForSeconds(.75f);
+                yield return new WaitForSeconds(.5f);
             }
+            
+            goToNextLine = false;
+            while(!goToNextLine) yield return new WaitForSeconds(.1f);
         }
 
         yield return new WaitForSeconds(1f);
