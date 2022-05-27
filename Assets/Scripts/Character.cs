@@ -50,6 +50,7 @@ public class Character : MonoBehaviour
     public float boxCastSize;
 
     public bool goToNextLine;
+    public GameObject spaceControls;
 
     void Start()
     {
@@ -211,7 +212,7 @@ public class Character : MonoBehaviour
 
         while((line = dialogueReader.ReadLine()) != " ")
         {
-
+            spaceControls.SetActive(false);
             dialogueText.text = line;
             yield return new WaitForSeconds(.3f);
             while((line = dialogueReader.ReadLine()) != "")
@@ -221,7 +222,13 @@ public class Character : MonoBehaviour
             }
             
             goToNextLine = false;
-            while(!goToNextLine) yield return new WaitForSeconds(.1f);
+            int waitCount = 0;
+            while(!goToNextLine) 
+            {
+                waitCount++;
+                if(waitCount > 20) spaceControls.SetActive(true);
+                yield return new WaitForSeconds(.1f);
+            }
         }
 
         yield return new WaitForSeconds(1f);
