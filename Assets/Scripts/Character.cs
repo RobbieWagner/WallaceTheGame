@@ -208,17 +208,16 @@ public class Character : MonoBehaviour
         string line;
         scoreGO.SetActive(false);
         dialogueText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
 
-        while((line = dialogueReader.ReadLine()) != " ")
+        while((line = dialogueReader.ReadLine()) != "~~~")
         {
             spaceControls.SetActive(false);
-            dialogueText.text = line;
-            yield return new WaitForSeconds(.3f);
-            while((line = dialogueReader.ReadLine()) != "")
+            dialogueText.text = "";
+            yield return new WaitForSeconds(.1f);
+            while((line = dialogueReader.ReadLine()) != "~~")
             {
-                dialogueText.text = line;
-                yield return new WaitForSeconds(.5f);
+                dialogueText.text += line;
+                yield return new WaitForSeconds(.1f);
             }
             
             goToNextLine = false;

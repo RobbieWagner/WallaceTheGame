@@ -7,8 +7,7 @@ public class PlantedPumpkin : MonoBehaviour
 
     public Character character;
     public float health;
-
-    public GameObject pumpkinPrefab;
+    
     public Rigidbody2D body;
 
     public int scoreHandOff;

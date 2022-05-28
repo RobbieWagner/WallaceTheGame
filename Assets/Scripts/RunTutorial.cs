@@ -7,9 +7,12 @@ public class RunTutorial : MonoBehaviour
 {
 
     public Character character;
+    public Transform characterT;
+
     public string openingDialoguePath;
     public string tutorialPart2Path;
     public string tutorialPart3Path;
+    public string tutorialPart4Path;
 
     public GameObject wasdControls;
 
@@ -46,6 +49,20 @@ public class RunTutorial : MonoBehaviour
         while(!tutorialGate.opened) yield return new WaitForSeconds(.3f);
 
         yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart3Path)));
+
+        while(
+            !(
+                (characterT.position.x > 30 
+                && characterT.position.x < 33 
+                && characterT.position.y < 20)
+                ||(characterT.position.x > -27 
+                && characterT.position.x < -1 
+                && characterT.position.y > 20.25)
+                ||(characterT.position.y > 1 
+                && characterT.position.y < 4 
+                && characterT.position.x > 20))) yield return new WaitForSeconds(.3f);
+        
+        yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
 
         StopCoroutine(Tutorial());
     }
