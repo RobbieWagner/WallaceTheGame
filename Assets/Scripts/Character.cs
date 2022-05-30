@@ -171,6 +171,20 @@ public class Character : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D colliderEvent)
     {
+
+        PumpkinScoring scoreObject = colliderEvent.gameObject.GetComponent<PumpkinScoring>();
+
+        if (scoreObject != null)
+        {
+            // Yes, change the score
+            score += scoreObject.points;
+            // Destroy the object
+            //pickupSound.Play();
+            Destroy(colliderEvent.gameObject);
+            scoreText.text = "Pumpkin Points: " + score;
+            StartCoroutine(TurnOnScoreTemporarily());
+        }
+
         if(colliderEvent.gameObject.CompareTag("Enemy"))
         {
             // Respawn the player, they keep their points

@@ -13,6 +13,7 @@ public class RunTutorial : MonoBehaviour
     public string tutorialPart2Path;
     public string tutorialPart3Path;
     public string tutorialPart4Path;
+    public string tutorialPart5Path;
 
     public GameObject wasdControls;
 
@@ -52,9 +53,9 @@ public class RunTutorial : MonoBehaviour
 
         while(
             !(
-                (characterT.position.x > 30 
-                && characterT.position.x < 33 
-                && characterT.position.y < 20)
+                (characterT.position.x > -2 
+                && characterT.position.x < 2
+                && characterT.position.y > 20.4)
                 ||(characterT.position.x > -27 
                 && characterT.position.x < -1 
                 && characterT.position.y > 20.25)
@@ -63,6 +64,13 @@ public class RunTutorial : MonoBehaviour
                 && characterT.position.x > 20))) yield return new WaitForSeconds(.3f);
         
         yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+
+        while(!
+                (characterT.position.x > -1
+                && characterT.position.x < 14 
+                && characterT.position.y >= 50)) yield return new WaitForSeconds(.3f);
+
+        if(!(character.score >= 25 )) yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart5Path)));
 
         StopCoroutine(Tutorial());
     }
