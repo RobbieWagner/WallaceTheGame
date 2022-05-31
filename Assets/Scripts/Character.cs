@@ -187,6 +187,7 @@ public class Character : MonoBehaviour
 
         if(colliderEvent.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log(colliderEvent.gameObject.name);
             // Respawn the player, they keep their points
             body.velocity = new Vector2(0, 0);
             transform.position = new Vector2(characterOriginX, characterOriginY);

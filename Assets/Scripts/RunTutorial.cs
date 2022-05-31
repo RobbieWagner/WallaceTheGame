@@ -14,12 +14,17 @@ public class RunTutorial : MonoBehaviour
     public string tutorialPart3Path;
     public string tutorialPart4Path;
     public string tutorialPart5Path;
+    public string tutorialPart6Path;
+    public string tutorialPart7Path;
+    public string tutorialPart8Path;
 
     public GameObject wasdControls;
 
     bool hasMoved = false;
 
     public Gate tutorialGate;
+
+    public GameObject magicGate;
 
     // Start is called before the first frame update
     void Start()
@@ -68,9 +73,28 @@ public class RunTutorial : MonoBehaviour
         while(!
                 (characterT.position.x > -1
                 && characterT.position.x < 14 
-                && characterT.position.y >= 50)) yield return new WaitForSeconds(.3f);
+                && characterT.position.y >= 50)
+                && !(character.score == 30)) yield return new WaitForSeconds(.3f);
 
-        if(!(character.score >= 25 )) yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart5Path)));
+        if(!(character.score == 30))
+        {
+            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart5Path)));
+            while(character.score != 30) yield return new WaitForSeconds(.3f);
+            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart6Path)));
+        } 
+        else
+        {
+            while(character.score != 30) yield return new WaitForSeconds(.3f);
+            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart7Path)));
+        }
+
+        magicGate.SetActive(false);
+
+        while(!
+                (characterT.position.x > -1
+                && characterT.position.x < 14 
+                && characterT.position.y >= 55)) yield return new WaitForSeconds(.3f);
+            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart8Path)));
 
         StopCoroutine(Tutorial());
     }
