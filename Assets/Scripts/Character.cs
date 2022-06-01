@@ -100,7 +100,10 @@ public class Character : MonoBehaviour
         if(Input.GetKeyDown("space"))
         {
 
-            if(!goToNextLine) goToNextLine = true;
+            if(!goToNextLine){ 
+                goToNextLine = true;
+                spaceControls.SetActive(false);
+            }
 
             /* RaycastHit2D hit = Physics2D.BoxCast(bc2d.bounds.center, bc2d.bounds.size, 0f, Vector2.down, boxCastDistance, interactable);
 

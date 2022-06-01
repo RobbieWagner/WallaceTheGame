@@ -26,6 +26,8 @@ public class RunTutorial : MonoBehaviour
 
     public GameObject magicGate;
 
+    public RunHatSection runHatSection;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +97,8 @@ public class RunTutorial : MonoBehaviour
                 && characterT.position.x < 14 
                 && characterT.position.y >= 55)) yield return new WaitForSeconds(.3f);
             yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart8Path)));
+
+        StartCoroutine(runHatSection.HatsSection());
 
         StopCoroutine(Tutorial());
     }
