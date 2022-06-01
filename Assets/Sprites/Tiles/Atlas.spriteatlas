@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 8567723923872770196, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 5063161256294987493, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -6580872018834081011, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -1115700144541502596, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 7397797107525869942, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 2112698535192818015, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -3131976858056513741, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -7170654965780642138, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -5825015642280121454, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 663066772788606803, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -136355126042578622, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 883164742482573147, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 7888280403292429363, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 4673229607846777932, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 8735139030885289071, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 6133048715827530737, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 4716133609284388104, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 8798955731438739131, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -8288407100595981541, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -6674771945346552698, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 6356898900471687009, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 1836441325101470143, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -2910896668165527075, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 1133641726875271615, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 5102525972538080391, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 4022020965966986746, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 3104841772527252129, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 5125600381427849288, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -1230691242225195005, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -8290135836757389528, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -8804942295976560682, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -9094337416429864054, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 6411210361545177527, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 864778421561855882, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 1209354637069863290, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 5803125778894997789, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 5244042919166758881, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -5188614326242208738, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 5083356100866394250, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 6244905577139501475, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -5464937817083975688, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 7515539365254789808, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -6517893961320842083, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -2331012266039431356, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 4549531789697376177, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -7606069741937711804, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 2220114873976909336, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -9130673602086140448, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: -675808163108259702, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  - {fileID: 4805195941226086565, guid: 01b232d041c8af549a8555573a19dc84, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Big_Dirt_Water_Robbie-export_12
+  - Big_Dirt_Water_Robbie-export_13
+  - Big_Dirt_Water_Robbie-export_10
+  - Big_Dirt_Water_Robbie-export_11
+  - Big_Dirt_Water_Robbie-export_16
+  - Big_Dirt_Water_Robbie-export_17
+  - Big_Dirt_Water_Robbie-export_14
+  - Big_Dirt_Water_Robbie-export_15
+  - Big_Dirt_Water_Robbie-export_18
+  - Big_Dirt_Water_Robbie-export_19
+  - Big_Dirt_Water_Robbie-export_7
+  - Big_Dirt_Water_Robbie-export_6
+  - Big_Dirt_Water_Robbie-export_5
+  - Big_Dirt_Water_Robbie-export_4
+  - Big_Dirt_Water_Robbie-export_3
+  - Big_Dirt_Water_Robbie-export_2
+  - Big_Dirt_Water_Robbie-export_1
+  - Big_Dirt_Water_Robbie-export_0
+  - Big_Dirt_Water_Robbie-export_9
+  - Big_Dirt_Water_Robbie-export_8
+  - Big_Dirt_Water_Robbie-export_49
+  - Big_Dirt_Water_Robbie-export_48
+  - Big_Dirt_Water_Robbie-export_38
+  - Big_Dirt_Water_Robbie-export_41
+  - Big_Dirt_Water_Robbie-export_39
+  - Big_Dirt_Water_Robbie-export_40
+  - Big_Dirt_Water_Robbie-export_43
+  - Big_Dirt_Water_Robbie-export_42
+  - Big_Dirt_Water_Robbie-export_34
+  - Big_Dirt_Water_Robbie-export_45
+  - Big_Dirt_Water_Robbie-export_35
+  - Big_Dirt_Water_Robbie-export_29
+  - Big_Dirt_Water_Robbie-export_44
+  - Big_Dirt_Water_Robbie-export_36
+  - Big_Dirt_Water_Robbie-export_28
+  - Big_Dirt_Water_Robbie-export_47
+  - Big_Dirt_Water_Robbie-export_37
+  - Big_Dirt_Water_Robbie-export_27
+  - Big_Dirt_Water_Robbie-export_46
+  - Big_Dirt_Water_Robbie-export_30
+  - Big_Dirt_Water_Robbie-export_26
+  - Big_Dirt_Water_Robbie-export_31
+  - Big_Dirt_Water_Robbie-export_25
+  - Big_Dirt_Water_Robbie-export_32
+  - Big_Dirt_Water_Robbie-export_24
+  - Big_Dirt_Water_Robbie-export_33
+  - Big_Dirt_Water_Robbie-export_23
+  - Big_Dirt_Water_Robbie-export_22
+  - Big_Dirt_Water_Robbie-export_21
+  - Big_Dirt_Water_Robbie-export_20
+  m_RenderDataMap: {}
+  m_Tag: Atlas
+  m_IsVariant: 0
