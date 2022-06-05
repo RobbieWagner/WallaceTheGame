@@ -197,7 +197,7 @@ public class Character : MonoBehaviour
         {
             //Grabs hazard type and checks for immunity
             Hazard hazard = colliderEvent.GetComponent<Hazard>();
-            if(hazard != null && hazard.hazardType != hazardTypeImmunity)
+            if(hazard != null && !(hazard.hazardType.Equals(hazardTypeImmunity)))
             {
                 // Respawn the player, they keep their points
                 body.velocity = new Vector2(0, 0);
