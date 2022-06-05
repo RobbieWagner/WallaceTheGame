@@ -12,6 +12,8 @@ public class RunHatSection : MonoBehaviour
     public string hatsPart1Path;
     public string hatsPart2Path;
 
+    public GameObject hatsParent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class RunHatSection : MonoBehaviour
     public IEnumerator HatsSection()
     {
         characterT.position = new Vector2(0,0);
+        hatsParent.SetActive(true);
 
         yield return new WaitForSeconds(.1f);
 

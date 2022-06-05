@@ -52,6 +52,8 @@ public class Character : MonoBehaviour
     public bool goToNextLine;
     public GameObject spaceControls;
 
+    public string hazardTypeImmunity;
+
     void Start()
     {
         // Get the rigid body component for the player character.
@@ -190,17 +192,21 @@ public class Character : MonoBehaviour
 
         if(colliderEvent.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log(colliderEvent.gameObject.name);
-            // Respawn the player, they keep their points
-            body.velocity = new Vector2(0, 0);
-            transform.position = new Vector2(characterOriginX, characterOriginY);
-            animator.SetFloat("Speed X", 0);
-            animator.SetFloat("Speed Y", 0);
-
-            if(!hasDied)
+            //Grabs hazard type and checks for immunity
+            Hazard hazard = colliderEvent.GetComponent<Hazard>();
+            if(hazard != null && hazard.hazardType != hazardTypeImmunity)
             {
-                hasDied = true;
-                StartCoroutine(ReadDialogue(new StreamReader(allergyDialoguePath)));
+                // Respawn the player, they keep their points
+                body.velocity = new Vector2(0, 0);
+                transform.position = new Vector2(characterOriginX, characterOriginY);
+                animator.SetFloat("Speed X", 0);
+                animator.SetFloat("Speed Y", 0);
+
+                if(!hasDied)
+                {
+                    hasDied = true;
+                    StartCoroutine(ReadDialogue(new StreamReader(allergyDialoguePath)));
+                }
             }
         }
 
@@ -231,7 +237,7 @@ public class Character : MonoBehaviour
         {
             spaceControls.SetActive(false);
             dialogueText.text = "";
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.03f);
             while((line = dialogueReader.ReadLine()) != "~~")
             {
                 dialogueText.text += line;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5522627531036139856}
   - component: {fileID: 4051292729542272064}
   - component: {fileID: 4014071302836373010}
+  - component: {fileID: 4832142127784763179}
   m_Layer: 0
   m_Name: RockEnemy
   m_TagString: Enemy
@@ -124,3 +125,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   distanceLimit: 0
+--- !u!114 &4832142127784763179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552259197786447291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc29575feacd6545b0a44145816e75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hazardType: rock
