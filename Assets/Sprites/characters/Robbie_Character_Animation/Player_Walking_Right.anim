@@ -23,17 +23,17 @@ AnimationClip:
       value: {fileID: 9223066587437965312, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}
     - time: 0.11666667
       value: {fileID: 4716467024855257486, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}
-    - time: 0.25
+    - time: 0.23333333
       value: {fileID: 806961051880346898, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}
-    - time: 0.36666667
+    - time: 0.35
       value: {fileID: 7577410073836270847, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}
-    - time: 0.5
+    - time: 0.48333332
       value: {fileID: -4725495766450120835, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}
-    - time: 0.6166667
+    - time: 0.6
       value: {fileID: -4303905324153313208, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}
-    - time: 0.75
+    - time: 0.71666664
       value: {fileID: 634669049834412642, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}
-    - time: 0.8666667
+    - time: 0.8333333
       value: {fileID: 1597174488563332764, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}
     - time: 1
       value: {fileID: 1597174488563332764, guid: e3ed30cf50ab3ac498bf0e69cd52c712, type: 3}

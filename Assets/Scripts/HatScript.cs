@@ -9,6 +9,8 @@ public class HatScript : MonoBehaviour
 
     public Character character;
 
+    public GameObject hatObjectOnCharacter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,7 @@ public class HatScript : MonoBehaviour
         {
             character.hazardTypeImmunity = hazardImmunityGranted;
             gameObject.SetActive(false);
+            hatObjectOnCharacter.SetActive(true);
         }
     }
 }
