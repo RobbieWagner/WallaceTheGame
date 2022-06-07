@@ -14,10 +14,13 @@ public class RunHatSection : MonoBehaviour
 
     public GameObject hatsParent;
 
+    // skip the first section (used for testing)
+    public bool skipTutorial;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(HatsSection());
+        if(skipTutorial) StartCoroutine(HatsSection());
     }
 
     // Update is called once per frame

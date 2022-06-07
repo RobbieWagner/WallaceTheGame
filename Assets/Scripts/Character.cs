@@ -55,6 +55,8 @@ public class Character : MonoBehaviour
     public string hazardTypeImmunity;
     public bool canOpenDoors;
 
+    public GameObject hats;
+
     void Start()
     {
         // Get the rigid body component for the player character.
@@ -205,11 +207,10 @@ public class Character : MonoBehaviour
                 body.velocity = new Vector2(0, 0);
                 transform.position = new Vector2(characterOriginX, characterOriginY);
 
-                foreach(Animator animator in animators)
-                {
-                    animator.SetFloat("Speed X", 0);
-                    animator.SetFloat("Speed Y", 0);
-                }
+                LoseHat();
+
+                //Turns on hat pickups on the field after death
+                if(hats.activeSelf) foreach(Transform hat in hats.transform) hat.gameObject.SetActive(true);
 
                 if(!hasDied)
                 {
@@ -228,6 +229,16 @@ public class Character : MonoBehaviour
                 gate.OpenGate();
             }
         }
+    }
+
+    public void LoseHat()
+    {
+        foreach(Animator hat in animators)
+        { 
+            if(hat.gameObject != gameObject) hat.gameObject.SetActive(false);
+        }
+        hazardTypeImmunity = "none";
+        canOpenDoors = false;
     }
 
     public IEnumerator ReadDialogue(StreamReader dialogueReader)

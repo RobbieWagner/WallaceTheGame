@@ -18,7 +18,7 @@ public class SteelDoorOpener : MonoBehaviour
 
     IEnumerator OpenDoor()
     {
-        SteelDoor.SetBool("opening", true);
+        SteelDoor.SetBool("Opening", true);
         yield return new WaitForSeconds(1.7f);
         SteelDoorsCollider.SetActive(false);
         StopCoroutine(OpenDoor());

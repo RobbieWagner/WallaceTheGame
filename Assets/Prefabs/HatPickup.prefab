@@ -123,14 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hazardImmunityGranted: 
+  grantsCanOpenDoors: 0
   character: {fileID: 0}
   hatObjectOnCharacter: {fileID: 0}
-  hatsOnCharacter:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   hatsOnGround:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

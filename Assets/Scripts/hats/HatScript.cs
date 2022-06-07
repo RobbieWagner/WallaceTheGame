@@ -13,8 +13,7 @@ public class HatScript : MonoBehaviour
     public Character character;
 
     public GameObject hatObjectOnCharacter;
-    public GameObject[] hatsOnCharacter;
-    public GameObject[] hatsOnGround;
+    public GameObject hatsParent;
 
     // Start is called before the first frame update
     void Start()
@@ -32,21 +31,18 @@ public class HatScript : MonoBehaviour
     {
         if(colliderEvent.gameObject.CompareTag("Player"))
         {
+            character.LoseHat();
+
             character.hazardTypeImmunity = hazardImmunityGranted;
 
             if(grantsCanOpenDoors)
             {
                 character.canOpenDoors = true;
             }
-            else
-            {
-                character.canOpenDoors = false;
-            }
 
-            foreach(GameObject hat in hatsOnGround) hat.SetActive(true);
+            foreach(Transform hat in hatsParent.transform) hat.gameObject.SetActive(true);
             gameObject.SetActive(false);
 
-            foreach(GameObject hat in hatsOnCharacter) hat.SetActive(false);
             hatObjectOnCharacter.SetActive(true);
         }
     }
