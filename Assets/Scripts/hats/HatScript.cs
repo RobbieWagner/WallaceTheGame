@@ -7,6 +7,9 @@ public class HatScript : MonoBehaviour
 
     public string hazardImmunityGranted;
 
+    // whether or not the hat lets the player open steel doors
+    public bool grantsCanOpenDoors;
+
     public Character character;
 
     public GameObject hatObjectOnCharacter;
@@ -30,6 +33,15 @@ public class HatScript : MonoBehaviour
         if(colliderEvent.gameObject.CompareTag("Player"))
         {
             character.hazardTypeImmunity = hazardImmunityGranted;
+
+            if(grantsCanOpenDoors)
+            {
+                character.canOpenDoors = true;
+            }
+            else
+            {
+                character.canOpenDoors = false;
+            }
 
             foreach(GameObject hat in hatsOnGround) hat.SetActive(true);
             gameObject.SetActive(false);

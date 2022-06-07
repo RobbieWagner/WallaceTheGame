@@ -53,6 +53,7 @@ public class Character : MonoBehaviour
     public GameObject spaceControls;
 
     public string hazardTypeImmunity;
+    public bool canOpenDoors;
 
     void Start()
     {
@@ -69,7 +70,8 @@ public class Character : MonoBehaviour
 
         scoreText.fontSize = 20;
 
-        bool goToNextLine = false;
+        goToNextLine = false;
+        canOpenDoors = false;
     }
 
     void Update()
