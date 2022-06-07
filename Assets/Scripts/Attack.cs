@@ -60,8 +60,8 @@ public class Attack : MonoBehaviour
                      if (enemyScript)
                      {
                          // Damage
-                         if(enemyScript.health > 1) StartCoroutine(enemyScript.ShakePumpkin());
-                         enemyScript.health -= damage;
+                         if(enemyScript.pumpkinHealth > 1) StartCoroutine(enemyScript.ShakePumpkin());
+                         enemyScript.pumpkinHealth -= damage;
                      }
                  }
              }

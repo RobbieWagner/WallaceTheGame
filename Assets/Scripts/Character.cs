@@ -54,6 +54,7 @@ public class Character : MonoBehaviour
 
     public string hazardTypeImmunity;
     public bool canOpenDoors;
+    public bool canPullIngrainedPumpkins;
 
     public GameObject hats;
 
@@ -73,7 +74,9 @@ public class Character : MonoBehaviour
         scoreText.fontSize = 20;
 
         goToNextLine = false;
+        
         canOpenDoors = false;
+        canPullIngrainedPumpkins = false;
     }
 
     void Update()

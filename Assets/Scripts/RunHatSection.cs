@@ -14,6 +14,8 @@ public class RunHatSection : MonoBehaviour
 
     public GameObject hatsParent;
 
+    public GameObject ingrainedPumpkins;
+
     // skip the first section (used for testing)
     public bool skipTutorial;
 
@@ -33,6 +35,7 @@ public class RunHatSection : MonoBehaviour
     {
         characterT.position = new Vector2(0,0);
         hatsParent.SetActive(true);
+        ingrainedPumpkins.SetActive(true);
 
         yield return new WaitForSeconds(.1f);
 

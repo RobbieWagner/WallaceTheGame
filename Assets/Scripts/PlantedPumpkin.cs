@@ -6,31 +6,45 @@ public class PlantedPumpkin : MonoBehaviour
 {
 
     public Character character;
-    public float health;
-    
+    private bool playerIsTouching;
+    public int pumpkinHealth;
     public Rigidbody2D body;
+    public GameObject pumpkin;
 
     public int scoreHandOff;
 
     public Animator pumpkinAnimator;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        playerIsTouching = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(health <= 0)
-        {
-            character.score += scoreHandOff;
-            StartCoroutine(character.TurnOnScoreTemporarily());
-            character.scoreText.text = "Pumpkin Points: " + character.score;
-            Destroy(gameObject);
+        if(Input.GetKey(KeyCode.J) && character.canPullIngrainedPumpkins && playerIsTouching)
+        {   
+            pumpkinHealth--;
+            if(pumpkinHealth == 0)
+            {
+                Instantiate(pumpkin, gameObject.transform.position, gameObject.transform.rotation);
+                gameObject.SetActive(false);
+            }
+            else StartCoroutine(ShakePumpkin());
         }
     }
 
     public IEnumerator ShakePumpkin()
     {
+        character.canPullIngrainedPumpkins = false;
+        character.canMove = false;
         pumpkinAnimator.SetBool("Shaking", true);
         yield return new WaitForSeconds(.4f);
         pumpkinAnimator.SetBool("Shaking", false);
+        character.canMove = true;
+        character.canPullIngrainedPumpkins = true;
         StopCoroutine(ShakePumpkin());
     }
 }
