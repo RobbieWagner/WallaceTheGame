@@ -98,6 +98,7 @@ public class RunTutorial : MonoBehaviour
                 && characterT.position.y >= 55)) yield return new WaitForSeconds(.3f);
             yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart8Path)));
 
+        runHatSection.gameObject.SetActive(true);
         StartCoroutine(runHatSection.HatsSection());
 
         StopCoroutine(Tutorial());

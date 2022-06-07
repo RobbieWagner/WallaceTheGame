@@ -17,6 +17,7 @@ public class RunHatSection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(HatsSection());
     }
 
     // Update is called once per frame
