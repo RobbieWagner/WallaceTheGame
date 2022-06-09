@@ -9,6 +9,7 @@ public class HatScript : MonoBehaviour
 
     // whether or not the hat lets the player open steel doors
     public bool grantsCanOpenDoors;
+    public bool grantsCanPullIngrainedPumpkins;
 
     public Character character;
 
@@ -38,6 +39,11 @@ public class HatScript : MonoBehaviour
             if(grantsCanOpenDoors)
             {
                 character.canOpenDoors = true;
+            }
+
+            if(grantsCanPullIngrainedPumpkins)
+            {
+                character.canPullIngrainedPumpkins = true;
             }
 
             foreach(Transform hat in hatsParent.transform) hat.gameObject.SetActive(true);

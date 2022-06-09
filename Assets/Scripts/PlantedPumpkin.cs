@@ -27,13 +27,23 @@ public class PlantedPumpkin : MonoBehaviour
         if(Input.GetKey(KeyCode.J) && character.canPullIngrainedPumpkins && playerIsTouching)
         {   
             pumpkinHealth--;
-            if(pumpkinHealth == 0)
+            if(pumpkinHealth <= 0)
             {
                 Instantiate(pumpkin, gameObject.transform.position, gameObject.transform.rotation);
                 gameObject.SetActive(false);
             }
             else StartCoroutine(ShakePumpkin());
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject == character.gameObject) playerIsTouching = true;
+    }
+
+    void OnCollisionExit2D(Collision2D collider)
+    {
+        if (collider.gameObject == character.gameObject) playerIsTouching = false;
     }
 
     public IEnumerator ShakePumpkin()
