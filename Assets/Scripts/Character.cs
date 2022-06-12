@@ -55,6 +55,7 @@ public class Character : MonoBehaviour
     public string hazardTypeImmunity;
     public bool canOpenDoors;
     public bool canPullIngrainedPumpkins;
+    public bool canPushThings;
 
     public GameObject hats;
 
@@ -77,6 +78,7 @@ public class Character : MonoBehaviour
         
         canOpenDoors = false;
         canPullIngrainedPumpkins = false;
+        canPushThings = false;
     }
 
     void Update()
@@ -242,6 +244,8 @@ public class Character : MonoBehaviour
         }
         hazardTypeImmunity = "none";
         canOpenDoors = false;
+        canPullIngrainedPumpkins = false;
+        canPushThings = false;
     }
 
     public IEnumerator ReadDialogue(StreamReader dialogueReader)

@@ -9,44 +9,47 @@ public class PushableBridge : MonoBehaviour
     public BridgeBoxData southData;
     public BridgeBoxData westData;
 
+    public Rigidbody2D rb2d;
+
     public bool pushable;
     public bool goalReached;
     public Character character;
 
+    public GameObject goal;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject == character.gameObject)
+        if(collision.gameObject == character.gameObject && character.canPushThings)
         {
-            Debug.Log("hi");
-            Transform bridgeT = gameObject.transform;
             if(northData.wallaceTouching) 
             {
-                bridgeT.position = new Vector3(
-                bridgeT.position.x, 
-                bridgeT.position.y - 5,
-                bridgeT.position.z );
+                rb2d.velocity = new Vector2(0, -3);
             }
             if(eastData.wallaceTouching) 
             {
-                bridgeT.position = new Vector3(
-                bridgeT.position.x - 5, 
-                bridgeT.position.y,
-                bridgeT.position.z );
+                rb2d.velocity = new Vector2(-3, 0);
             }
             if(southData.wallaceTouching) 
             {
-                bridgeT.position = new Vector3(
-                bridgeT.position.x, 
-                bridgeT.position.y + 5,
-                bridgeT.position.z );
+                rb2d.velocity = new Vector2(0, 3);
             }
             if(westData.wallaceTouching) 
             {
-                bridgeT.position = new Vector3(
-                bridgeT.position.x + 5, 
-                bridgeT.position.y,
-                bridgeT.position.z );
+                rb2d.velocity = new Vector2(3, 0);
             }
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(0,0);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject == goal.gameObject)
+        {
+            rb2d.velocity = new Vector2(0,0);
+            goalReached = true;
         }
     }
 }

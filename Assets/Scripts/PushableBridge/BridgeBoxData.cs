@@ -9,13 +9,12 @@ public class BridgeBoxData : MonoBehaviour
     public bool wallaceTouching;
     public Character character;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hello");
         if(collision.gameObject == character.gameObject) wallaceTouching = true;
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject == character.gameObject) wallaceTouching = false;
     }
