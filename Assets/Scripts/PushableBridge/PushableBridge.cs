@@ -40,7 +40,7 @@ public class PushableBridge : MonoBehaviour
         }
         else
         {
-            rb2d.velocity = new Vector2(0,0);
+            rb2d.velocity = Vector2.zero;
         }
     }
 
@@ -48,7 +48,8 @@ public class PushableBridge : MonoBehaviour
     {
         if(collision.gameObject == goal.gameObject)
         {
-            rb2d.velocity = new Vector2(0,0);
+            Debug.Log("goalReached");
+            rb2d.velocity = Vector2.zero;
             goalReached = true;
         }
     }
