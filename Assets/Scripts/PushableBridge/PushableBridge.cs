@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Tilemaps;
+
 
 public class PushableBridge : MonoBehaviour
 {
@@ -12,10 +15,40 @@ public class PushableBridge : MonoBehaviour
     public Rigidbody2D rb2d;
 
     public bool pushable;
-    public bool goalReached;
     public Character character;
 
     public GameObject goal;
+    public bool goalReached;
+    public BoxCollider2D[] bridgeRails; 
+    public BoxCollider2D[] killingColliders;
+    public TilemapCollider2D[] chasms;
+
+    void Start()
+    {
+        foreach(BoxCollider2D collider in bridgeRails)
+        {
+            collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        foreach(BoxCollider2D collider in killingColliders)
+        {
+            collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+
+        goalReached = false;
+    }
+
+    void Update()
+    {
+        if(goalReached)
+        {
+            //prevent bridge from being moved again!!!
+            gameObject.GetComponent<TilemapCollider2D>().enabled = false;
+            foreach(BoxCollider2D collider in bridgeRails)
+            {
+                collider.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -48,9 +81,28 @@ public class PushableBridge : MonoBehaviour
     {
         if(collision.gameObject == goal.gameObject)
         {
-            Debug.Log("goalReached");
             rb2d.velocity = Vector2.zero;
             goalReached = true;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        bool chasmCovered = false;
+        foreach(TilemapCollider2D chasm in chasms)
+        {
+            if(chasm.gameObject == collision.gameObject) 
+            {
+                chasmCovered = true;
+            }
+        }
+        if(goalReached && chasmCovered)  
+        {  
+            collision.gameObject.GetComponent<TilemapCollider2D>().enabled = false;
+            foreach(BoxCollider2D collider in killingColliders)
+            {
+                collider.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
         }
     }
 }
