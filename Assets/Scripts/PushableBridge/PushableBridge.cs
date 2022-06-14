@@ -22,6 +22,7 @@ public class PushableBridge : MonoBehaviour
     public BoxCollider2D[] bridgeRails; 
     public BoxCollider2D[] killingColliders;
     public TilemapCollider2D[] chasms;
+    public Rigidbody2D bridgeRB;
 
     void Start()
     {
@@ -48,11 +49,21 @@ public class PushableBridge : MonoBehaviour
                 collider.gameObject.GetComponent<BoxCollider2D>().enabled = true;
             }
         }
+
+
+        if(character.canPushThings && bridgeRB != null)
+        {
+            bridgeRB.bodyType = RigidbodyType2D.Dynamic;
+        }
+        else if (bridgeRB != null)
+        {
+            bridgeRB.bodyType = RigidbodyType2D.Static;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject == character.gameObject && character.canPushThings)
+        if(collision.gameObject == character.gameObject)
         {
             if(northData.wallaceTouching) 
             {
@@ -103,6 +114,7 @@ public class PushableBridge : MonoBehaviour
             {
                 collider.gameObject.GetComponent<BoxCollider2D>().enabled = true;
             }
+            Destroy(gameObject.GetComponent<Rigidbody2D>());
         }
     }
 }
