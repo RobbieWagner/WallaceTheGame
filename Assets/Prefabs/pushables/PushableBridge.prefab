@@ -645,6 +645,9 @@ MonoBehaviour:
   goal: {fileID: 0}
   goalReached: 0
   bridgeRails: []
+  killingColliders: []
+  chasms: []
+  bridgeRB: {fileID: 2671311619335115985}
 --- !u!50 &2671311619335115985
 Rigidbody2D:
   serializedVersion: 4

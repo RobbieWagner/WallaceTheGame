@@ -52,4 +52,9 @@ public class pushableObject : MonoBehaviour
             rb2d.bodyType = RigidbodyType2D.Static;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        rb2d.velocity = Vector2.zero;
+    } 
 }
