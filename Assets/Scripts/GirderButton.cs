@@ -32,7 +32,7 @@ public class GirderButton : MonoBehaviour
         if(buttonOn && finalPosition != girderTPos)
         {
             girderRB2D.bodyType = RigidbodyType2D.Dynamic;
-            girderRB2D.MovePosition(finalPosition);
+            girderT.position = Vector2.MoveTowards(girderT.position, finalPosition, .01f);
         }
         else
         {
