@@ -8,7 +8,7 @@ public class HatScript : MonoBehaviour
     public string hazardImmunityGranted;
 
     // whether or not the hat lets the player open steel doors
-    public bool grantsCanOpenDoors;
+    public bool grantsCanPushButtons;
     public bool grantsCanPullIngrainedPumpkins;
     public bool grantsCanPushThings;
 
@@ -37,9 +37,9 @@ public class HatScript : MonoBehaviour
 
             character.hazardTypeImmunity = hazardImmunityGranted;
 
-            if(grantsCanOpenDoors)
+            if(grantsCanPushButtons)
             {
-                character.canOpenDoors = true;
+                character.canPushButtons = true;
             }
 
             if(grantsCanPullIngrainedPumpkins)

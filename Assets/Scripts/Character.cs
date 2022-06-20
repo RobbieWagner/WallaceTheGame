@@ -53,7 +53,7 @@ public class Character : MonoBehaviour
     public GameObject spaceControls;
 
     public string hazardTypeImmunity;
-    public bool canOpenDoors;
+    public bool canPushButtons;
     public bool canPullIngrainedPumpkins;
     public bool canPushThings;
 
@@ -76,7 +76,7 @@ public class Character : MonoBehaviour
 
         goToNextLine = false;
         
-        canOpenDoors = false;
+        canPushButtons = false;
         canPullIngrainedPumpkins = false;
         canPushThings = false;
     }
@@ -243,7 +243,7 @@ public class Character : MonoBehaviour
             if(hat.gameObject != gameObject) hat.gameObject.SetActive(false);
         }
         hazardTypeImmunity = "none";
-        canOpenDoors = false;
+        canPushButtons = false;
         canPullIngrainedPumpkins = false;
         canPushThings = false;
     }

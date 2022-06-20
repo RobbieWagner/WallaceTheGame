@@ -10,7 +10,7 @@ public class SteelDoorOpener : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") && character.canOpenDoors)
+        if(collision.gameObject.CompareTag("Player") && character.canPushButtons)
         {
             StartCoroutine(OpenDoor());
         }

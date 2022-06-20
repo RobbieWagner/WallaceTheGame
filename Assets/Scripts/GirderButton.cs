@@ -21,7 +21,7 @@ public class GirderButton : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject == character.gameObject && character.canOpenDoors)
+        if(collision.gameObject == character.gameObject && character.canPushButtons)
         {
             buttonOn = true;
         }

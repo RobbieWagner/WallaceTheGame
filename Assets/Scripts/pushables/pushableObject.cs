@@ -16,29 +16,19 @@ public class pushableObject : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject == character.gameObject)
+        if(character.canPushThings && rb2d != null)
         {
-            if(northData.wallaceTouching) 
-            {
-                rb2d.velocity = new Vector2(0, -3);
-            }
-            if(eastData.wallaceTouching) 
-            {
-                rb2d.velocity = new Vector2(-3, 0);
-            }
-            if(southData.wallaceTouching) 
-            {
-                rb2d.velocity = new Vector2(0, 3);
-            }
-            if(westData.wallaceTouching) 
-            {
-                rb2d.velocity = new Vector2(3, 0);
-            }
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
         }
-        else
+        else if (rb2d != null)
         {
-            rb2d.velocity = Vector2.zero;
+            rb2d.bodyType = RigidbodyType2D.Static;
         }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        rb2d.bodyType = RigidbodyType2D.Static;
     }
 
     void Update()
