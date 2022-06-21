@@ -28,6 +28,11 @@ public class ResetButton : MonoBehaviour
             for(int i = 0; i < objectPositions.Length; i++)
             {
                 objectsToBeReset[i].transform.position = objectPositions[i];
+                PushableBridge bridge = objectsToBeReset[i].GetComponent<PushableBridge>();
+                if(bridge != null)
+                {
+                    bridge.ResetBridge();
+                }
             }
         }
     }

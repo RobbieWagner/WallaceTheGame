@@ -117,4 +117,24 @@ public class PushableBridge : MonoBehaviour
             Destroy(gameObject.GetComponent<Rigidbody2D>());
         }
     }
+
+    public void ResetBridge()
+    {
+        foreach(BoxCollider2D collider in bridgeRails)
+        {
+            collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        foreach(BoxCollider2D collider in killingColliders)
+        {
+            collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        //create a new rigidbody, set gravity scale to 0, put it on dynamic, make sure this rigid body is associated with other objects in scripts
+        if(rb2d == null)
+        {
+            rb2d = gameObject.AddComponent<Rigidbody2D>();
+            rb2d.gravityScale = 0;
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
+        }
+        goalReached = false;
+    }
 }
