@@ -272,7 +272,7 @@ public class Character : MonoBehaviour
             while((line = dialogueReader.ReadLine()) != "~~")
             {
                 dialogueText.text += line;
-                yield return new WaitForSeconds(.1f);
+                yield return new WaitForSeconds(.05f);
             }
             
             goToNextLine = false;
@@ -281,7 +281,7 @@ public class Character : MonoBehaviour
             {
                 waitCount++;
                 if(waitCount > 20) spaceControls.SetActive(true);
-                yield return new WaitForSeconds(.1f);
+                yield return new WaitForSeconds(.05f);
             }
         }
 

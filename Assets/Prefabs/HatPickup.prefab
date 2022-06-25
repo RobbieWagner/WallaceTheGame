@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!61 &8375004294128229658
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,12 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hazardImmunityGranted: 
-  grantsCanOpenDoors: 0
+  grantsCanPushButtons: 0
+  grantsCanPullIngrainedPumpkins: 0
+  grantsCanPushThings: 0
   character: {fileID: 0}
   hatObjectOnCharacter: {fileID: 0}
-  hatsOnGround:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  hatsParent: {fileID: 0}

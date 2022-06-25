@@ -22,7 +22,10 @@ public class PushableBridge : MonoBehaviour
     public BoxCollider2D[] bridgeRails; 
     public BoxCollider2D[] killingColliders;
     public TilemapCollider2D[] chasms;
-    public Rigidbody2D bridgeRB;
+
+    private TilemapCollider2D coveredChasm;
+
+    public bool chasmCovered;
 
     void Start()
     {
@@ -36,6 +39,7 @@ public class PushableBridge : MonoBehaviour
         }
 
         goalReached = false;
+        chasmCovered = false;
     }
 
     void Update()
@@ -51,13 +55,13 @@ public class PushableBridge : MonoBehaviour
         }
 
 
-        if(character.canPushThings && bridgeRB != null)
+        if(character.canPushThings && rb2d != null)
         {
-            bridgeRB.bodyType = RigidbodyType2D.Dynamic;
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
         }
-        else if (bridgeRB != null)
+        else if (rb2d != null)
         {
-            bridgeRB.bodyType = RigidbodyType2D.Static;
+            rb2d.bodyType = RigidbodyType2D.Static;
         }
     }
 
@@ -99,7 +103,6 @@ public class PushableBridge : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        bool chasmCovered = false;
         foreach(TilemapCollider2D chasm in chasms)
         {
             if(chasm.gameObject == collision.gameObject) 
@@ -109,7 +112,11 @@ public class PushableBridge : MonoBehaviour
         }
         if(goalReached && chasmCovered)  
         {  
-            collision.gameObject.GetComponent<TilemapCollider2D>().enabled = false;
+            coveredChasm = collision.gameObject.GetComponent<TilemapCollider2D>();
+            foreach(TilemapCollider2D chasm in chasms)
+                {
+                    if(coveredChasm != null && coveredChasm == chasm) coveredChasm.enabled = false;
+                }
             foreach(BoxCollider2D collider in killingColliders)
             {
                 collider.gameObject.GetComponent<BoxCollider2D>().enabled = true;
@@ -132,9 +139,12 @@ public class PushableBridge : MonoBehaviour
         if(rb2d == null)
         {
             rb2d = gameObject.AddComponent<Rigidbody2D>();
+            rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb2d.gravityScale = 0;
             rb2d.bodyType = RigidbodyType2D.Dynamic;
         }
+        coveredChasm.enabled = true;
         goalReached = false;
+        gameObject.GetComponent<TilemapCollider2D>().enabled = true;
     }
 }

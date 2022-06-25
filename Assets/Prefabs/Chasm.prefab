@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1129455015533095469}
   - component: {fileID: 5426950832327169456}
   - component: {fileID: 3752564262578384573}
+  - component: {fileID: 9199998370224832397}
   m_Layer: 0
   m_Name: Chasm
   m_TagString: Enemy
@@ -135,3 +136,16 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &9199998370224832397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6448002773904661927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc29575feacd6545b0a44145816e75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hazardType: hole
