@@ -21,11 +21,14 @@ public class PressurePlate : MonoBehaviour
 
     private bool objectRising;
 
+    private ArrayList buttonPressers;
+
     // Start is called before the first frame update
     void Start()
     {
         initialPosition = objectT.position;
         objectRising = false;
+        buttonPressers = new ArrayList();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -34,6 +37,7 @@ public class PressurePlate : MonoBehaviour
         buttonAnimator.SetBool("ButtonPressed", true);
         objectToMove.bodyType = RigidbodyType2D.Dynamic;
         objectC.enabled = false;
+        buttonPressers.Add(null);
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -56,10 +60,14 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        objectRising = false;
-        buttonAnimator.SetBool("ButtonPressed", false);
-        objectToMove.bodyType = RigidbodyType2D.Dynamic;
-        StartCoroutine(resetMechanism());
+        buttonPressers.Remove(null);
+        if(!buttonPressers.Contains(null))
+        {
+            objectRising = false;
+            buttonAnimator.SetBool("ButtonPressed", false);
+            objectToMove.bodyType = RigidbodyType2D.Dynamic;
+            StartCoroutine(resetMechanism());
+        }
     }
 
     IEnumerator resetMechanism()
@@ -73,20 +81,21 @@ public class PressurePlate : MonoBehaviour
                 objectTilemap.color = new Vector4(objectTilemap.color.r, objectTilemap.color.g, objectTilemap.color.b, objectTilemap.color.a + .01f);
             }
         }
+        if(objectTilemap.color.a < 1f) objectTilemap.color = new Vector4(objectTilemap.color.r, objectTilemap.color.g, objectTilemap.color.b, 1);
         objectC.enabled = true;
         objectToMove.bodyType = RigidbodyType2D.Static;
         StopCoroutine(resetMechanism());
     }
 
-    void Update()
-    {
-        if(objectC.enabled && (objectT.position.x != finalPosition.x || objectT.position.y != finalPosition.y) && objectRising)
-        {
-            objectC.enabled = false;
-        }
-        else if(objectT.position.x == finalPosition.x || objectT.position.y == finalPosition.y)
-        {
-            objectC.enabled = true;
-        }
-    }
+    // void Update()
+    // {
+    //     if(objectC.enabled && (objectT.position.x != initialPosition.x || objectT.position.y != initialPosition.y) && objectRising)
+    //     {
+    //         objectC.enabled = false;
+    //     }
+    //     else if(objectT.position.x == initialPosition.x || objectT.position.y == initialPosition.y)
+    //     {
+    //         objectC.enabled = true;
+    //     }
+    // }
 }
