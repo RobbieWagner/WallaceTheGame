@@ -38,7 +38,8 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(objectT.position.x != finalPosition.x && objectT.position.y != finalPosition.y)
+        if(objectC.enabled == true) objectC.enabled = false;
+        if(objectT.position.x != finalPosition.x || objectT.position.y != finalPosition.y)
         {
             objectT.position = Vector2.MoveTowards(objectT.position, finalPosition, .1f);
         }
@@ -63,11 +64,10 @@ public class PressurePlate : MonoBehaviour
 
     IEnumerator resetMechanism()
     {
-        while(!(objectT.position.x <= initialPosition.x) && !(objectT.position.y <= initialPosition.y) && !objectRising)
+        while(!(objectT.position.x <= initialPosition.x) || !(objectT.position.y <= initialPosition.y) && !objectRising)
         {
-            Debug.Log("hi");
             objectT.position = Vector2.MoveTowards(objectT.position, initialPosition, .1f);
-            yield return new WaitForSeconds(.001f);
+            yield return new WaitForSeconds(.009f);
             if(!(objectTilemap.color.a >= 1f))
             {
                 objectTilemap.color = new Vector4(objectTilemap.color.r, objectTilemap.color.g, objectTilemap.color.b, objectTilemap.color.a + .01f);
@@ -76,5 +76,17 @@ public class PressurePlate : MonoBehaviour
         objectC.enabled = true;
         objectToMove.bodyType = RigidbodyType2D.Static;
         StopCoroutine(resetMechanism());
+    }
+
+    void Update()
+    {
+        if(objectC.enabled && (objectT.position.x != finalPosition.x || objectT.position.y != finalPosition.y) && objectRising)
+        {
+            objectC.enabled = false;
+        }
+        else if(objectT.position.x == finalPosition.x || objectT.position.y == finalPosition.y)
+        {
+            objectC.enabled = true;
+        }
     }
 }
