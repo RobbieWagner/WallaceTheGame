@@ -9,14 +9,17 @@ public class GirderButton : MonoBehaviour
     public Character character;
     
     public Transform girderT;
-    private Vector2 girderTPos;
     public Vector2 finalPosition;
+    public Vector2 initialPosition;
+
+    private bool resetting;
 
     private bool buttonOn;
 
     void Start()
     {
-        girderTPos = girderT.position;
+        initialPosition = girderT.position;
+        resetting = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -29,10 +32,22 @@ public class GirderButton : MonoBehaviour
 
     void Update()
     {
-        if(buttonOn && finalPosition != girderTPos)
+        if(buttonOn && (finalPosition.x != girderT.position.x || finalPosition.y != girderT.position.y) && !resetting)
         {
             girderRB2D.bodyType = RigidbodyType2D.Dynamic;
             girderT.position = Vector2.MoveTowards(girderT.position, finalPosition, .01f);
+        }
+        else if(buttonOn && (initialPosition.x != girderT.position.x || initialPosition.y != girderT.position.y) && resetting)
+        {
+            girderRB2D.bodyType = RigidbodyType2D.Dynamic;
+            girderT.position = Vector2.MoveTowards(girderT.position, initialPosition, .1f);
+        }
+        else if(resetting)
+        {
+            buttonOn = false;
+            girderRB2D.velocity = Vector2.zero;
+            girderRB2D.bodyType = RigidbodyType2D.Static;
+            resetting = false;
         }
         else
         {
@@ -41,4 +56,8 @@ public class GirderButton : MonoBehaviour
         }
     }
 
+    public void resetMechanism()
+    {
+        resetting = true;
+    }
 }

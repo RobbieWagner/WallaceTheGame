@@ -189,17 +189,17 @@ Tilemap:
   - m_RefCount: 3
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.8364202, g: 0.5447873, b: 0.5727567, a: 1}
+    m_Data: {r: 0.82837945, g: 0.40464348, b: 0.4165557, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.7560528, g: 0.52465177, b: 0.54912454, a: 1}
+    m_Data: {r: 0.714898, g: 0.39281628, b: 0.42960572, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.79580224, g: 0.37063208, b: 0.3749378, a: 1}
+    m_Data: {r: 0.70052457, g: 0.32831883, b: 0.4198118, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.8969607, g: 0.41552034, b: 0.4437389, a: 1}
+    m_Data: {r: 0.72814065, g: 0.46016783, b: 0.53273654, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.7763748, g: 0.382617, b: 0.4281465, a: 1}
+    m_Data: {r: 0.89673173, g: 0.5871726, b: 0.6490528, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.74109954, g: 0.39570034, b: 0.43755633, a: 1}
+    m_Data: {r: 0.8738034, g: 0.59461766, b: 0.6850392, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 6658747022370885046}
   - component: {fileID: 90327764274568700}
   - component: {fileID: 7384149146429604610}
+  - component: {fileID: 6792704792954447058}
   m_Layer: 0
   m_Name: girder
   m_TagString: Untagged
@@ -555,6 +556,19 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &6792704792954447058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6950745359711734603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f20776596761b4488c05dcac7354a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8501370089777497983}
 --- !u!1 &9091286145669316108
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,3 +695,4 @@ MonoBehaviour:
   character: {fileID: 0}
   girderT: {fileID: 6423956060784452171}
   finalPosition: {x: 0, y: 0}
+  initialPosition: {x: 0, y: 0}
