@@ -23,6 +23,8 @@ public class PressurePlate : MonoBehaviour
 
     private ArrayList buttonPressers;
 
+    public CollisionTracker girderCollisions;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +45,7 @@ public class PressurePlate : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision)
     {
         if(objectC.enabled == true) objectC.enabled = false;
-        if(objectT.position.x != finalPosition.x || objectT.position.y != finalPosition.y)
+        if(objectT.position.x != finalPosition.x || objectT.position.y != finalPosition.y && !girderCollisions.colliding)
         {
             objectT.position = Vector2.MoveTowards(objectT.position, finalPosition, .1f);
         }
@@ -72,7 +74,7 @@ public class PressurePlate : MonoBehaviour
 
     IEnumerator resetMechanism()
     {
-        while(!(objectT.position.x <= initialPosition.x) || !(objectT.position.y <= initialPosition.y) && !objectRising)
+        while(!(objectT.position.x <= initialPosition.x) || !(objectT.position.y <= initialPosition.y) && !girderCollisions.colliding && !objectRising)
         {
             objectT.position = Vector2.MoveTowards(objectT.position, initialPosition, .1f);
             yield return new WaitForSeconds(.009f);
