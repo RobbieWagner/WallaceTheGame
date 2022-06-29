@@ -25,6 +25,8 @@ public class PressurePlate : MonoBehaviour
 
     public CollisionTracker girderCollisions;
 
+    public int resetCountdown;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,14 +76,20 @@ public class PressurePlate : MonoBehaviour
 
     IEnumerator resetMechanism()
     {
-        while(!(objectT.position.x <= initialPosition.x) || !(objectT.position.y <= initialPosition.y) && !girderCollisions.colliding && !objectRising)
+        float resetCountdownFlag = (float) resetCountdown;
+        while(!(objectT.position.x <= initialPosition.x) || !(objectT.position.y <= initialPosition.y) && !girderCollisions.colliding && !objectRising && resetCountdown != 0)
         {
+            resetCountdown--;
             objectT.position = Vector2.MoveTowards(objectT.position, initialPosition, .1f);
             yield return new WaitForSeconds(.009f);
             if(!(objectTilemap.color.a >= 1f))
             {
                 objectTilemap.color = new Vector4(objectTilemap.color.r, objectTilemap.color.g, objectTilemap.color.b, objectTilemap.color.a + .01f);
             }
+        }
+        if(resetCountdown == 0)
+        {
+            objectT.position = initialPosition;
         }
         if(objectTilemap.color.a < 1f) objectTilemap.color = new Vector4(objectTilemap.color.r, objectTilemap.color.g, objectTilemap.color.b, 1);
         objectC.enabled = true;

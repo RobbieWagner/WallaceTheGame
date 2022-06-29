@@ -5,11 +5,6 @@ using UnityEngine;
 public class pushableObject : MonoBehaviour
 {
 
-    public PushableObjectBoundary northData;
-    public PushableObjectBoundary eastData;
-    public PushableObjectBoundary southData;
-    public PushableObjectBoundary westData;
-
     public Rigidbody2D rb2d;
 
     public Character character;
@@ -22,7 +17,7 @@ public class pushableObject : MonoBehaviour
         }
         else if (rb2d != null)
         {
-            rb2d.bodyType = RigidbodyType2D.Static;
+            rb2d.bodyType = RigidbodyType2D.Kinematic;
         }
     }
 
@@ -39,7 +34,7 @@ public class pushableObject : MonoBehaviour
         }
         else if (rb2d != null)
         {
-            rb2d.bodyType = RigidbodyType2D.Static;
+            rb2d.bodyType = RigidbodyType2D.Kinematic;
         }
     }
 }

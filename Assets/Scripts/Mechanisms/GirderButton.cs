@@ -46,13 +46,13 @@ public class GirderButton : MonoBehaviour
         {
             buttonOn = false;
             girderRB2D.velocity = Vector2.zero;
-            girderRB2D.bodyType = RigidbodyType2D.Static;
+            girderRB2D.bodyType = RigidbodyType2D.Kinematic;
             resetting = false;
         }
         else
         {
             girderRB2D.velocity = Vector2.zero;
-            girderRB2D.bodyType = RigidbodyType2D.Static;
+            girderRB2D.bodyType = RigidbodyType2D.Kinematic;
         }
     }
 
