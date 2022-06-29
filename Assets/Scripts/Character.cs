@@ -119,7 +119,7 @@ public class Character : MonoBehaviour
                 spaceControls.SetActive(false);
             }
 
-            /* RaycastHit2D hit = Physics2D.BoxCast(bc2d.bounds.center, bc2d.bounds.size, 0f, Vector2.down, boxCastDistance, interactable);
+            RaycastHit2D hit = Physics2D.BoxCast(bc2d.bounds.center, bc2d.bounds.size, 0f, Vector2.down, boxCastDistance, interactable);
 
             if (!hit)
             {
@@ -166,7 +166,7 @@ public class Character : MonoBehaviour
                 float lowPitch = dialogueInfo.lowPitch;
                 float highPitch = dialogueInfo.highPitch;
                 StartCoroutine(ReadDialogue(new StreamReader(dialoguePath), dialogueSound, color, lowPitch, highPitch, dialogueInfo.interactedOnce, dialogueInfo));
-            } */
+            }
         }
     }
 
@@ -304,21 +304,31 @@ public class Character : MonoBehaviour
             animator.SetFloat("Speed X", 0);
             animator.SetFloat("Speed Y", 0);
         }
+
         canMove = false;
         string line;
         scoreGO.SetActive(false);
         dialogueText.gameObject.SetActive(true);
         dialogueText.color = color;
-        while((line = dialogueReader.ReadLine()) != " ")
+        while((line = dialogueReader.ReadLine()) != "~~~")
         {
-            dialogueText.text = line;
-            yield return new WaitForSeconds(.5f);
-            while((line = dialogueReader.ReadLine()) != "")
+            dialogueText.text = "";
+            yield return new WaitForSeconds(.03f);
+            while((line = dialogueReader.ReadLine()) != "~~")
             {
-                dialogueText.text = line;
+                dialogueText.text += line;
                 dialogueSound.pitch = Random.Range(lowPitch, highPitch);
                 dialogueSound.Play();
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(.05f);
+            }
+
+            goToNextLine = false;
+            int waitCount = 0;
+            while(!goToNextLine) 
+            {
+                waitCount++;
+                if(waitCount > 20) spaceControls.SetActive(true);
+                yield return new WaitForSeconds(.05f);
             }
         }
 
