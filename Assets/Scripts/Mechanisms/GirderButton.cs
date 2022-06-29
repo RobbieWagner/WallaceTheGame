@@ -35,7 +35,7 @@ public class GirderButton : MonoBehaviour
         if(buttonOn && (finalPosition.x != girderT.position.x || finalPosition.y != girderT.position.y) && !resetting)
         {
             girderRB2D.bodyType = RigidbodyType2D.Dynamic;
-            girderT.position = Vector2.MoveTowards(girderT.position, finalPosition, .01f);
+            girderT.position = Vector2.MoveTowards(girderT.position, finalPosition, .006f);
         }
         else if(buttonOn && (initialPosition.x != girderT.position.x || initialPosition.y != girderT.position.y) && resetting)
         {
