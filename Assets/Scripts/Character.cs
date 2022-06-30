@@ -44,8 +44,8 @@ public class Character : MonoBehaviour
     public AudioSource pickupSound;
     public AudioSource goalSound;
 
-    float characterOriginX;
-    float characterOriginY;
+    public float characterOriginX;
+    public float characterOriginY;
 
     public float boxCastSize;
 
@@ -166,6 +166,14 @@ public class Character : MonoBehaviour
                 float lowPitch = dialogueInfo.lowPitch;
                 float highPitch = dialogueInfo.highPitch;
                 StartCoroutine(ReadDialogue(new StreamReader(dialoguePath), dialogueSound, color, lowPitch, highPitch, dialogueInfo.interactedOnce, dialogueInfo));
+
+                SavePoint newSavePoint = hit.transform.gameObject.GetComponent<SavePoint>();
+                if (newSavePoint != null)
+                {
+                    characterOriginX = newSavePoint.positionX;
+                    characterOriginY = newSavePoint.positionY;
+                    StartCoroutine(newSavePoint.SavePointReached());
+                }
             }
         }
     }
