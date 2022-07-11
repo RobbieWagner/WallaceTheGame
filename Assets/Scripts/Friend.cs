@@ -6,9 +6,32 @@ public class Friend : MonoBehaviour
 {
 
     public Animator friendAnimator;
+    bool moving;
+    bool doneMoving;
+
+    Vector2 destination;
+    float step;
+
+    void Start()
+    {
+        moving = false;
+        doneMoving = false;
+    }
+
+    void Update()
+    {
+        if(moving)
+        {
+            if(step < .1f) step = .1f;
+            gameObject.transform.position = Vector2.MoveTowards(destination, gameObject.transform.position, step);
+            if(Vector2.Distance(destination, gameObject.transform.position) < step) doneMoving = true;
+        }
+
+    }
 
     public IEnumerator MoveFriend(Vector2 stoppingPlace, string direction, float movingIncrement)
     {
+        Debug.Log("Move Friend Running");
         if(direction.ToLower().Equals("south") || direction.ToLower().Equals("s") || direction.ToLower().Equals("down"))
         {
             friendAnimator.SetBool("Walking Down", true);
@@ -26,16 +49,25 @@ public class Friend : MonoBehaviour
             friendAnimator.SetBool("Walking Right", true);
         }
 
-        while(Vector2.Distance(gameObject.transform.position, stoppingPlace) >= movingIncrement);
+        destination = stoppingPlace;
+        step = movingIncrement;
+        bool moving = true;
+
+        while(!doneMoving)
         {
-            gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, stoppingPlace, movingIncrement);
-            yield return new WaitForSeconds(.01f);
+            yield return null;
         }
+
+        moving = false;
+        doneMoving = false;
 
         if(friendAnimator.GetBool("Walking Down")) friendAnimator.SetBool("walking Down", false);
         if(friendAnimator.GetBool("Walking Up")) friendAnimator.SetBool("walking Up", false);        
         if(friendAnimator.GetBool("Walking Left")) friendAnimator.SetBool("walking Left", false);
         if(friendAnimator.GetBool("Walking Right")) friendAnimator.SetBool("walking Right", false);
+
+        yield return new WaitForSeconds(.5f);
+
         StopCoroutine(MoveFriend(stoppingPlace, direction, movingIncrement));
     }
 }

@@ -29,6 +29,7 @@ public class RunGameOpening : MonoBehaviour
         blackScreen.SetActive(false);
         yield return new WaitForSeconds(.1f);
 
+        Debug.Log("hi");
         yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(0, 6.5f), "s", 0.1f));
         yield return StartCoroutine(character.ReadDialogue(new StreamReader(gameIntroPath2)));
         
