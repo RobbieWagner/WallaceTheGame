@@ -194,6 +194,18 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void StopCharacter()
+    {
+         body.velocity = new Vector2(0, 0);
+        
+        foreach(Animator animator in animators)
+        {
+            animator.SetFloat("Speed X", 0);
+            animator.SetFloat("Speed Y", 0);
+        }
+        canMove = false;
+    }
+
     void OnTriggerEnter2D(Collider2D colliderEvent)
     {
 
@@ -258,15 +270,7 @@ public class Character : MonoBehaviour
 
     public IEnumerator ReadDialogue(StreamReader dialogueReader)
     {
-        //Stop the player from moving
-        body.velocity = new Vector2(0, 0);
-        
-        foreach(Animator animator in animators)
-        {
-            animator.SetFloat("Speed X", 0);
-            animator.SetFloat("Speed Y", 0);
-        }
-        canMove = false;
+        StopCharacter();
 
         string line;
         scoreGO.SetActive(false);
@@ -313,7 +317,7 @@ public class Character : MonoBehaviour
             animator.SetFloat("Speed Y", 0);
         }
 
-        canMove = false;
+        StopCharacter();
         string line;
         scoreGO.SetActive(false);
         dialogueText.gameObject.SetActive(true);

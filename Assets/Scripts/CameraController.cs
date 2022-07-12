@@ -5,13 +5,47 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    public IEnumerator MoveCamera(Vector2 stoppingPlace, float movingIncrement)
+    bool moving;
+    bool doneMoving;
+    float step;
+    Vector3 destination;
+
+    void Start()
     {
-        while(Vector2.Distance(gameObject.transform.position, stoppingPlace) >= movingIncrement)
+        gameObject.transform.position = new Vector3(0, 0, -10);
+        moving = false;
+        doneMoving = false;
+    }
+
+    void Update()
+    {
+        if(moving)
         {
-            gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, stoppingPlace, movingIncrement);
-            yield return new WaitForSeconds(.01f);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, destination, step);
+            if(Vector3.Distance(destination, gameObject.transform.position) < step) doneMoving = true;
         }
+    }
+
+    public void ResetCamera()
+    {
+        //may need to change if global and not local
+        StartCoroutine(MoveCamera(new Vector3(0, 0, -10), 6 * Time.deltaTime));
+    }
+
+    public IEnumerator MoveCamera(Vector3 stoppingPlace, float movingIncrement)
+    {
+        destination = stoppingPlace;
+        step = movingIncrement;
+        moving = true;
+
+        while(!doneMoving)
+        {
+            yield return null;
+        }
+
+        moving = false;
+        doneMoving = false;
+
         StopCoroutine(MoveCamera(stoppingPlace, movingIncrement));
     }
 }

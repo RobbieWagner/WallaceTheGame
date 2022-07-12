@@ -22,8 +22,7 @@ public class Friend : MonoBehaviour
     {
         if(moving)
         {
-            if(step < .1f) step = .1f;
-            gameObject.transform.position = Vector2.MoveTowards(destination, gameObject.transform.position, step);
+            gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, destination, step);
             if(Vector2.Distance(destination, gameObject.transform.position) < step) doneMoving = true;
         }
 
@@ -31,7 +30,6 @@ public class Friend : MonoBehaviour
 
     public IEnumerator MoveFriend(Vector2 stoppingPlace, string direction, float movingIncrement)
     {
-        Debug.Log("Move Friend Running");
         if(direction.ToLower().Equals("south") || direction.ToLower().Equals("s") || direction.ToLower().Equals("down"))
         {
             friendAnimator.SetBool("Walking Down", true);
@@ -51,7 +49,7 @@ public class Friend : MonoBehaviour
 
         destination = stoppingPlace;
         step = movingIncrement;
-        bool moving = true;
+        moving = true;
 
         while(!doneMoving)
         {
@@ -61,10 +59,10 @@ public class Friend : MonoBehaviour
         moving = false;
         doneMoving = false;
 
-        if(friendAnimator.GetBool("Walking Down")) friendAnimator.SetBool("walking Down", false);
-        if(friendAnimator.GetBool("Walking Up")) friendAnimator.SetBool("walking Up", false);        
-        if(friendAnimator.GetBool("Walking Left")) friendAnimator.SetBool("walking Left", false);
-        if(friendAnimator.GetBool("Walking Right")) friendAnimator.SetBool("walking Right", false);
+        if(friendAnimator.GetBool("Walking Down")) friendAnimator.SetBool("Walking Down", false);
+        if(friendAnimator.GetBool("Walking Up")) friendAnimator.SetBool("Walking Up", false);        
+        if(friendAnimator.GetBool("Walking Left")) friendAnimator.SetBool("Walking Left", false);
+        if(friendAnimator.GetBool("Walking Right")) friendAnimator.SetBool("Walking Right", false);
 
         yield return new WaitForSeconds(.5f);
 
