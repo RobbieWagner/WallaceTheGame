@@ -17,6 +17,9 @@ public class RunTutorial : MonoBehaviour
 
     public GameObject wasdControls;
 
+    public GameObject pumpkinTutorial1;
+    public GameObject pumpkinTutorial2;
+
     bool hasMoved = false;
 
     public Gate tutorialGate;
@@ -28,17 +31,25 @@ public class RunTutorial : MonoBehaviour
 
     public RunHatSection runHatSection;
 
+    bool pickedUpPumpkin;
+    bool flashedPumpkinTutorial2;
+
     // Start is called before the first frame update
     void Start()
     {
         hasMoved = false;
         wasdControls.SetActive(false);
+        pickedUpPumpkin = false;
+
+        flashedPumpkinTutorial2 = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         if(character.canMove &&(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))) hasMoved = true;
+
+        if(character.score > 0 && !flashedPumpkinTutorial2) StartCoroutine(FlashPumpkinTutorial2());
     }
 
     public IEnumerator Tutorial()
@@ -72,6 +83,10 @@ public class RunTutorial : MonoBehaviour
         yield return StartCoroutine(cameraController.ResetCamera());
         character.canMove = true;
 
+        pumpkinTutorial1.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        pumpkinTutorial1.SetActive(false);
+
         //run if the player runs into anything dangerous
         while(!
                 (characterT.position.x > -1
@@ -103,5 +118,15 @@ public class RunTutorial : MonoBehaviour
         StartCoroutine(runHatSection.HatsSection());
 
         StopCoroutine(Tutorial());
+    }
+
+    IEnumerator FlashPumpkinTutorial2()
+    {
+        pumpkinTutorial2.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        pumpkinTutorial2.SetActive(false);
+        flashedPumpkinTutorial2 = true;
+
+        StopCoroutine(FlashPumpkinTutorial2());
     }
 }
