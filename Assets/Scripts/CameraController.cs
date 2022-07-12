@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
+    public Character character;
     bool moving;
     bool doneMoving;
     float step;
@@ -26,10 +26,10 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void ResetCamera()
+    public IEnumerator ResetCamera()
     {
-        //may need to change if global and not local
-        StartCoroutine(MoveCamera(new Vector3(0, 0, -10), 6 * Time.deltaTime));
+        yield return StartCoroutine(MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y, -10), 6 * Time.deltaTime));
+        StopCoroutine(ResetCamera());
     }
 
     public IEnumerator MoveCamera(Vector3 stoppingPlace, float movingIncrement)

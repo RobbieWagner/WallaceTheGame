@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RunGameOpening : MonoBehaviour
 {
-
+    //Runs the opening game dialogue/cutscene until right after Wallace's friend wakes him up
     public Character character;
     public Friend wallacesFriend;
     public GameObject blackScreen;
@@ -14,22 +14,14 @@ public class RunGameOpening : MonoBehaviour
     public string gameIntroPath;
     public string gameIntroPath2;
 
-    public GameObject wasdControls;
-    bool hasMoved;
+    public RunTutorial tutorialSection;
 
     // Start is called before the first frame update
     void Start()
     {
-        wasdControls.SetActive(false);
         blackScreen.SetActive(true);
-        hasMoved = false;
 
         StartCoroutine(BeginGame());
-    }
-
-    void Update()
-    {
-        if(character.canMove &&(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))) hasMoved = true;
     }
 
     IEnumerator BeginGame()
@@ -42,22 +34,13 @@ public class RunGameOpening : MonoBehaviour
         yield return StartCoroutine(cameraController.MoveCamera(new Vector3(0, 2, -10), 7 * Time.deltaTime));
         yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(0, 3.5f), "s", 0.01f));
         yield return StartCoroutine(character.ReadDialogue(new StreamReader(gameIntroPath2)));
+        character.StopCharacter();
         yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(0, 10f), "n", 7 * Time.deltaTime));
         wallacesFriend.gameObject.SetActive(false);
-        cameraController.ResetCamera();
-
-        yield return new WaitForSeconds(.25f);
+        yield return StartCoroutine(cameraController.ResetCamera());
         character.canMove = true;
 
-        wasdControls.SetActive(true);
-        
-        while(!hasMoved)
-        {
-            yield return new WaitForSeconds(.25f);
-        }
-
-        wasdControls.SetActive(false);
-        
+        StartCoroutine(tutorialSection.Tutorial());
         StopCoroutine(BeginGame());
     }
 }
