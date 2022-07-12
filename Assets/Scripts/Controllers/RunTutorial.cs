@@ -8,6 +8,9 @@ public class RunTutorial : MonoBehaviour
 
     public Character character;
     public Transform characterT;
+    public BoxCollider2D characterBC;
+    public float boxCastDistance;
+    public LayerMask hazard;
 
     public string tutorialPart1Path;
     public string tutorialPart2Path;
@@ -34,6 +37,8 @@ public class RunTutorial : MonoBehaviour
     bool pickedUpPumpkin;
     bool flashedPumpkinTutorial2;
 
+    bool hasGivenAllergyTutorial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +47,7 @@ public class RunTutorial : MonoBehaviour
         pickedUpPumpkin = false;
 
         flashedPumpkinTutorial2 = false;
+        hasGivenAllergyTutorial = false;
     }
 
     // Update is called once per frame
@@ -50,6 +56,29 @@ public class RunTutorial : MonoBehaviour
         if(character.canMove &&(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))) hasMoved = true;
 
         if(character.score > 0 && !flashedPumpkinTutorial2) StartCoroutine(FlashPumpkinTutorial2());
+
+        if(!hasGivenAllergyTutorial)
+        {
+            RaycastHit2D hit = Physics2D.BoxCast(characterBC.bounds.center, characterBC.bounds.size, 0f, Vector2.down, boxCastDistance, hazard);
+
+            if (!hit)
+            {
+                hit = Physics2D.BoxCast(characterBC.bounds.center, characterBC.bounds.size, 0f, Vector2.up, boxCastDistance, hazard);
+            }
+            if (!hit)
+            {
+                hit = Physics2D.BoxCast(characterBC.bounds.center, characterBC.bounds.size, 0f, Vector2.right, boxCastDistance, hazard);
+            }
+            if (!hit)
+            {
+                hit = Physics2D.BoxCast(characterBC.bounds.center, characterBC.bounds.size, 0f, Vector2.left, boxCastDistance, hazard);
+            }
+            if (hit && character.canMove)
+            {
+                hasGivenAllergyTutorial = true;
+                StartCoroutine(WarnPlayerOfAllergies());
+            }
+        }
     }
 
     public IEnumerator Tutorial()
@@ -87,7 +116,7 @@ public class RunTutorial : MonoBehaviour
         yield return new WaitForSeconds(3f);
         pumpkinTutorial1.SetActive(false);
 
-        //run if the player runs into anything dangerous
+        //more code to sort through below
         while(!
                 (characterT.position.x > -1
                 && characterT.position.x < 14 
@@ -128,5 +157,12 @@ public class RunTutorial : MonoBehaviour
         flashedPumpkinTutorial2 = true;
 
         StopCoroutine(FlashPumpkinTutorial2());
+    }
+
+    IEnumerator WarnPlayerOfAllergies()
+    {
+        yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart3Path)));
+
+        StopCoroutine(WarnPlayerOfAllergies());
     }
 }

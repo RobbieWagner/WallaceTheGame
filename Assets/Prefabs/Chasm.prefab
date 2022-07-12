@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5426950832327169456}
   - component: {fileID: 3752564262578384573}
   - component: {fileID: 9199998370224832397}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chasm
   m_TagString: Enemy
   m_Icon: {fileID: 0}
