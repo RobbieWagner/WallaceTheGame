@@ -39,6 +39,11 @@ public class RunTutorial : MonoBehaviour
 
     bool hasGivenAllergyTutorial;
 
+    bool hazardAbove;
+    bool hazardBelow;
+    bool hazardRight;
+    bool hazardLeft;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +53,11 @@ public class RunTutorial : MonoBehaviour
 
         flashedPumpkinTutorial2 = false;
         hasGivenAllergyTutorial = false;
+
+        hazardAbove = false;
+        hazardBelow = false;
+        hazardRight = false;
+        hazardLeft = false;
     }
 
     // Update is called once per frame
@@ -60,18 +70,22 @@ public class RunTutorial : MonoBehaviour
         if(!hasGivenAllergyTutorial)
         {
             RaycastHit2D hit = Physics2D.BoxCast(characterBC.bounds.center, characterBC.bounds.size, 0f, Vector2.down, boxCastDistance, hazard);
+            if(hit) hazardBelow = true;
 
             if (!hit)
             {
                 hit = Physics2D.BoxCast(characterBC.bounds.center, characterBC.bounds.size, 0f, Vector2.up, boxCastDistance, hazard);
+                if(hit) hazardAbove = true;
             }
             if (!hit)
             {
                 hit = Physics2D.BoxCast(characterBC.bounds.center, characterBC.bounds.size, 0f, Vector2.right, boxCastDistance, hazard);
+                if(hit) hazardRight = true;
             }
             if (!hit)
             {
                 hit = Physics2D.BoxCast(characterBC.bounds.center, characterBC.bounds.size, 0f, Vector2.left, boxCastDistance, hazard);
+                if(hit) hazardLeft = true;
             }
             if (hit && character.canMove)
             {
@@ -161,7 +175,40 @@ public class RunTutorial : MonoBehaviour
 
     IEnumerator WarnPlayerOfAllergies()
     {
+
         yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart3Path)));
+        character.StopCharacter();
+
+        if(hazardLeft)
+        {
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x + 10, character.gameObject.transform.position.y);
+            wallacesFriend.gameObject.SetActive(true);
+            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x + 7, character.gameObject.transform.position.y, -10), 8 * Time.deltaTime));
+        }
+        else if(hazardRight)
+        {
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x - 10, character.gameObject.transform.position.y);
+            wallacesFriend.gameObject.SetActive(true);
+            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x - 7, character.gameObject.transform.position.y, -10), 8 * Time.deltaTime));
+        }
+        else if(hazardBelow)
+        {
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 10);
+            wallacesFriend.gameObject.SetActive(true);
+            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 7, -10), 8 * Time.deltaTime));
+        }
+        else
+        {
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 10);
+            wallacesFriend.gameObject.SetActive(true);
+            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 7, -10), 8 * Time.deltaTime));
+        }
+
+        yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+        character.StopCharacter();
+        yield return StartCoroutine(cameraController.ResetCamera());
+
+        character.canMove = true;
 
         StopCoroutine(WarnPlayerOfAllergies());
     }
