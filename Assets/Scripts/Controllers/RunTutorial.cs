@@ -179,34 +179,49 @@ public class RunTutorial : MonoBehaviour
         yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart3Path)));
         character.StopCharacter();
 
+        //runs tutorial based off the direction the detected hazard is in
         if(hazardLeft)
         {
-            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x + 10, character.gameObject.transform.position.y);
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x + 9, character.gameObject.transform.position.y);
             wallacesFriend.gameObject.SetActive(true);
-            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x + 7, character.gameObject.transform.position.y, -10), 8 * Time.deltaTime));
+            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x + 3.5f, character.gameObject.transform.position.y, -10), 8 * Time.deltaTime));
+            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+            character.StopCharacter();
+            yield return StartCoroutine(cameraController.ResetCamera());
+            yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x + 5, wallacesFriend.gameObject.transform.position.y), "e", 10 * Time.deltaTime));
         }
         else if(hazardRight)
         {
-            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x - 10, character.gameObject.transform.position.y);
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x - 9, character.gameObject.transform.position.y);
             wallacesFriend.gameObject.SetActive(true);
-            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x - 7, character.gameObject.transform.position.y, -10), 8 * Time.deltaTime));
+            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x - 3.5f, character.gameObject.transform.position.y, -10), 8 * Time.deltaTime));
+            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+            character.StopCharacter();
+            yield return StartCoroutine(cameraController.ResetCamera());
+            yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x - 5, wallacesFriend.gameObject.transform.position.y), "w", 10 * Time.deltaTime));
         }
         else if(hazardBelow)
         {
-            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 10);
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 9);
             wallacesFriend.gameObject.SetActive(true);
-            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 7, -10), 8 * Time.deltaTime));
+            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 3.5f, -10), 8 * Time.deltaTime));
+            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+            character.StopCharacter();
+            yield return StartCoroutine(cameraController.ResetCamera());
+            yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x, wallacesFriend.gameObject.transform.position.y + 5), "n", 10 * Time.deltaTime));
         }
         else
         {
-            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 10);
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 9);
             wallacesFriend.gameObject.SetActive(true);
-            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 7, -10), 8 * Time.deltaTime));
+            yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 3.5f, -10), 8 * Time.deltaTime));
+            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+            character.StopCharacter();
+            yield return StartCoroutine(cameraController.ResetCamera());
+            yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x, wallacesFriend.gameObject.transform.position.y - 5), "s", 10 * Time.deltaTime));
         }
 
-        yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
-        character.StopCharacter();
-        yield return StartCoroutine(cameraController.ResetCamera());
+        wallacesFriend.gameObject.SetActive(false);
 
         character.canMove = true;
 
