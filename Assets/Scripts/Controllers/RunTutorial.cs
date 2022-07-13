@@ -161,6 +161,9 @@ public class RunTutorial : MonoBehaviour
         yield return StartCoroutine(cameraController.ResetCamera());
         character.canMove = true;
 
+        runHatSection.gameObject.SetActive(true);
+        StartCoroutine(runHatSection.HatsSection());
+
         StopCoroutine(Tutorial());
     }
 
