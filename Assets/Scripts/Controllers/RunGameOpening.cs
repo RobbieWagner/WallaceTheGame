@@ -16,6 +16,8 @@ public class RunGameOpening : MonoBehaviour
 
     public RunTutorial tutorialSection;
 
+    public DialogueHolder wallacesFriendsDH;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,14 +28,14 @@ public class RunGameOpening : MonoBehaviour
 
     IEnumerator BeginGame()
     {
-        yield return StartCoroutine(character.ReadDialogue(new StreamReader(gameIntroPath)));
+        yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(gameIntroPath));
         blackScreen.SetActive(false);
         yield return new WaitForSeconds(.1f);
 
         character.StopCharacter();
         yield return StartCoroutine(cameraController.MoveCamera(new Vector3(0, 2, -10), 7 * Time.deltaTime));
         yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(0, 3.5f), "s", 0.01f));
-        yield return StartCoroutine(character.ReadDialogue(new StreamReader(gameIntroPath2)));
+        yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(gameIntroPath2));
         character.StopCharacter();
         yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(0, 10f), "n", 7 * Time.deltaTime));
         wallacesFriend.gameObject.SetActive(false);

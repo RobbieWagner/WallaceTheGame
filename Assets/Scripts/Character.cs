@@ -307,7 +307,7 @@ public class Character : MonoBehaviour
         StopCoroutine(ReadDialogue(dialogueReader));
     }
 
-    IEnumerator ReadDialogue(StreamReader dialogueReader, AudioSource dialogueSound, Color color, float lowPitch, float highPitch, bool interactedOnce, DialogueHolder dialogueInfo)
+    public IEnumerator ReadDialogue(StreamReader dialogueReader, AudioSource dialogueSound, Color color, float lowPitch, float highPitch, bool interactedOnce, DialogueHolder dialogueInfo)
     {
         //Stop the player from moving
         body.velocity = new Vector2(0, 0);
@@ -352,7 +352,7 @@ public class Character : MonoBehaviour
         canMove = true;
         dialogueReader.Close();
         dialogueText.color = Color.white;
-        if(!dialogueInfo.interactedOnce) StartCoroutine(dialogueInfo.firstInteraction());
+        if(!dialogueInfo.interactedOnce) yield return StartCoroutine(dialogueInfo.FirstInteraction());
         StopCoroutine(ReadDialogue(dialogueReader, dialogueSound, color, lowPitch, highPitch, interactedOnce, dialogueInfo));
     }
 

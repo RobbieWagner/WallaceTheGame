@@ -44,6 +44,8 @@ public class RunTutorial : MonoBehaviour
     bool hazardRight;
     bool hazardLeft;
 
+    public DialogueHolder wallacesFriendsDH;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,14 +113,14 @@ public class RunTutorial : MonoBehaviour
         while(!tutorialGate.opened) yield return new WaitForSeconds(.3f);
 
         character.canMove = false;
-        yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart1Path)));
+        yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart1Path));
         character.StopCharacter();
 
         wallacesFriend.gameObject.transform.position = new Vector2(-1f, 21.23f);
         wallacesFriend.gameObject.SetActive(true);
         yield return StartCoroutine(cameraController.MoveCamera(new Vector3(0, 20, -10), 7 * Time.deltaTime));
 
-        yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart2Path)));
+        yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart2Path));
         character.StopCharacter();
 
         yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x, 30), "n", 7 * Time.deltaTime));
@@ -130,35 +132,9 @@ public class RunTutorial : MonoBehaviour
         yield return new WaitForSeconds(3f);
         pumpkinTutorial1.SetActive(false);
 
-        //more code to sort through below
-        while(!
-                (characterT.position.x > -1
-                && characterT.position.x < 14 
-                && characterT.position.y >= 50)
-                && !(character.score == 30)) yield return new WaitForSeconds(.3f);
+        while(character.score < 30) yield return null;
 
-        if(!(character.score == 30))
-        {
-            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart2Path)));
-            while(character.score != 30) yield return new WaitForSeconds(.3f);
-            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart3Path)));
-        } 
-        else
-        {
-            while(character.score != 30) yield return new WaitForSeconds(.3f);
-            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
-        }
-
-        magicGate.SetActive(false);
-
-        while(!
-                (characterT.position.x > -1
-                && characterT.position.x < 14 
-                && characterT.position.y >= 55)) yield return new WaitForSeconds(.3f);
-            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart5Path)));
-
-        runHatSection.gameObject.SetActive(true);
-        StartCoroutine(runHatSection.HatsSection());
+        yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart5Path));
 
         StopCoroutine(Tutorial());
     }
@@ -176,7 +152,7 @@ public class RunTutorial : MonoBehaviour
     IEnumerator WarnPlayerOfAllergies()
     {
 
-        yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart3Path)));
+        yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart3Path));
         character.StopCharacter();
 
         //runs tutorial based off the direction the detected hazard is in
@@ -185,7 +161,7 @@ public class RunTutorial : MonoBehaviour
             wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x + 9, character.gameObject.transform.position.y);
             wallacesFriend.gameObject.SetActive(true);
             yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x + 3.5f, character.gameObject.transform.position.y, -10), 8 * Time.deltaTime));
-            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+            yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart4Path));
             character.StopCharacter();
             yield return StartCoroutine(cameraController.ResetCamera());
             yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x + 5, wallacesFriend.gameObject.transform.position.y), "e", 10 * Time.deltaTime));
@@ -195,7 +171,7 @@ public class RunTutorial : MonoBehaviour
             wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x - 9, character.gameObject.transform.position.y);
             wallacesFriend.gameObject.SetActive(true);
             yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x - 3.5f, character.gameObject.transform.position.y, -10), 8 * Time.deltaTime));
-            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+            yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart4Path));
             character.StopCharacter();
             yield return StartCoroutine(cameraController.ResetCamera());
             yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x - 5, wallacesFriend.gameObject.transform.position.y), "w", 10 * Time.deltaTime));
@@ -205,7 +181,7 @@ public class RunTutorial : MonoBehaviour
             wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 9);
             wallacesFriend.gameObject.SetActive(true);
             yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 3.5f, -10), 8 * Time.deltaTime));
-            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+            yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart4Path));
             character.StopCharacter();
             yield return StartCoroutine(cameraController.ResetCamera());
             yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x, wallacesFriend.gameObject.transform.position.y + 5), "n", 10 * Time.deltaTime));
@@ -215,7 +191,7 @@ public class RunTutorial : MonoBehaviour
             wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 9);
             wallacesFriend.gameObject.SetActive(true);
             yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 3.5f, -10), 8 * Time.deltaTime));
-            yield return StartCoroutine(character.ReadDialogue(new StreamReader(tutorialPart4Path)));
+            yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart4Path));
             character.StopCharacter();
             yield return StartCoroutine(cameraController.ResetCamera());
             yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x, wallacesFriend.gameObject.transform.position.y - 5), "s", 10 * Time.deltaTime));
