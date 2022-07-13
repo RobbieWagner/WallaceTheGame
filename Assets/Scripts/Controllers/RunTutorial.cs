@@ -17,6 +17,7 @@ public class RunTutorial : MonoBehaviour
     public string tutorialPart3Path;
     public string tutorialPart4Path;
     public string tutorialPart5Path;
+    public string tutorialPart6Path;
 
     public GameObject wasdControls;
 
@@ -45,6 +46,8 @@ public class RunTutorial : MonoBehaviour
     bool hazardLeft;
 
     public DialogueHolder wallacesFriendsDH;
+
+    public GameObject wallacesFriendSprite1;
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +139,16 @@ public class RunTutorial : MonoBehaviour
 
         yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart5Path));
 
+        wallacesFriendSprite1.GetComponent<SpriteRenderer>().enabled = false;
+        wallacesFriendSprite1.GetComponent<BoxCollider2D>().enabled = false;
+
+        while(character.gameObject.transform.position.x < 4 || character.gameObject.transform.position.x > 18 || character.gameObject.transform.position.y < 43 || character.gameObject.transform.position.y > 57)
+        {
+            yield return null;
+        }
+
+        yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart6Path));
+
         StopCoroutine(Tutorial());
     }
 
@@ -178,7 +191,7 @@ public class RunTutorial : MonoBehaviour
         }
         else if(hazardBelow)
         {
-            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 9);
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 6);
             wallacesFriend.gameObject.SetActive(true);
             yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y + 3.5f, -10), 8 * Time.deltaTime));
             yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart4Path));
@@ -188,7 +201,7 @@ public class RunTutorial : MonoBehaviour
         }
         else
         {
-            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 9);
+            wallacesFriend.gameObject.transform.position = new Vector2(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 6);
             wallacesFriend.gameObject.SetActive(true);
             yield return StartCoroutine(cameraController.MoveCamera(new Vector3(character.gameObject.transform.position.x, character.gameObject.transform.position.y - 3.5f, -10), 8 * Time.deltaTime));
             yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart4Path));
