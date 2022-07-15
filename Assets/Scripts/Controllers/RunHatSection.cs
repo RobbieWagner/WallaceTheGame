@@ -90,7 +90,10 @@ public class RunHatSection : MonoBehaviour
         yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(hatsPart1Path));
         character.StopCharacter();
         yield return StartCoroutine(cameraController.ResetCamera());
-        character.canMove = false;
+        character.canMove = true;
+
+        //Wallace puts on hat and gains the power to pick pumpkins!
+
         StopCoroutine(IntroduceHats());
     }
 }

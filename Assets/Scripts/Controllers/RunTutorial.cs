@@ -157,7 +157,7 @@ public class RunTutorial : MonoBehaviour
         yield return StartCoroutine(cameraController.MoveCamera(new Vector3((characterPos.x + friendPos.x)/2, (characterPos.y + friendPos.y)/2, -10), 7 * Time.deltaTime));
         yield return StartCoroutine(wallacesFriendsDH.PassInfoIntoReadDialogue(tutorialPart6Path));
         character.StopCharacter();
-        yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x, 0), "s", 7 * Time.deltaTime));
+        yield return StartCoroutine(wallacesFriend.MoveFriend(new Vector2(wallacesFriend.gameObject.transform.position.x, 10), "s", 8 * Time.deltaTime));
         yield return StartCoroutine(cameraController.ResetCamera());
         character.canMove = true;
 
